@@ -7,7 +7,16 @@ export async function signInWithEmail(email: string, password: string) {
 
 export async function signUpWithEmail(email: string, password: string, name: string, phoneNumber?: string) {
   const supabase = createClient();
-  return supabase.auth.signUp({ email, password, options: { data: { name, phoneNumber } } });
+  const redirectBase = process.env.NEXT_PUBLIC_APP_URL ?? (typeof window !== "undefined" ? window.location.origin : "http://localhost:3000");
+
+  return supabase.auth.signUp({
+    email,
+    password,
+    options: {
+      data: { name, phoneNumber },
+      emailRedirectTo: `${redirectBase}/auth/callback`,
+    },
+  });
 }
 
 export async function resetPasswordEmail(email: string) {

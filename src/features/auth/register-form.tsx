@@ -29,7 +29,7 @@ export function RegisterForm() {
     }
     if (data.user) {
       toast({ title: "Check your inbox to verify your email", type: "success" });
-      router.push("/verify-email");
+      router.push(`/verify-email?email=${encodeURIComponent(values.email)}`);
     }
   }
 
