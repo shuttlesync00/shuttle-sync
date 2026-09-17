@@ -1,0 +1,1 @@
+UPDATE "Match" SET "status" = 'IN_PROGRESS' WHERE "status" = 'LIVE';
